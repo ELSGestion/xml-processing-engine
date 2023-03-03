@@ -1,0 +1,200 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>fr.lefebvredalloz.xml</groupId>
+  <artifactId>xml-processing-engine</artifactId>
+  <version>1.00.00</version>
+  <name>xml processing engine</name>
+  <description>xml processing engine</description>
+  
+  <licenses>
+		<license>
+			<name>MPL-2.0 license</name>
+			<url>https://www.mozilla.org/en-US/MPL/2.0/</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Hamdi KARRAY</name>
+			<email>h.karray-ext@lefebvre-dalloz.fr</email>
+			<organization>Lefebvre Dalloz</organization>
+			<organizationUrl>https://www.lefebvre-dalloz.fr/</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/ELSGestion/xml-processing-engine.git</connection>
+		<developerConnection>scm:git:ssh://github.com:ELSGestion/xml-processing-engine.git</developerConnection>
+		<url>http://github.com/ELSGestion/xml-processing-engine/tree/main</url>
+	</scm>
+  
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
+    <cp-protocol.version>1.00.00</cp-protocol.version>
+    <log4j-saxon-listener.version>1.00.00</log4j-saxon-listener.version>
+    <!-- 28/12/2021 : vulnérabilité CDS - CVE-2021-44228 déc -->
+    <log4j.version>2.17.0</log4j.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <!-- 28/12/2021 : vulnérabilité CDS - CVE-2021-44228 déc -->
+    
+    <Saxon-HE.version>11.4</Saxon-HE.version>
+    <commons-io.version>2.6</commons-io.version>
+    <java-cup.version>10k</java-cup.version>
+    <parallel.version>1.00.00</parallel.version>
+    <maven-model.version>3.3.9</maven-model.version>
+    
+    <xercesImpl-xsd11.version>2.12-beta-r1667115</xercesImpl-xsd11.version>
+  </properties>
+  
+  <dependencies>
+    
+<!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+	<dependency>
+		<groupId>commons-cli</groupId>
+		<artifactId>commons-cli</artifactId>
+		<version>1.5.0</version>
+	</dependency>    
+    
+    <dependency>
+      <groupId>org.opengis.cite.xerces</groupId>
+      <artifactId>xercesImpl-xsd11</artifactId>
+      <version>${xercesImpl-xsd11.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>edu.princeton.cup</groupId>
+      <artifactId>java-cup</artifactId>
+      <version>${java-cup.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>fr.lefebvredalloz.xml</groupId>
+      <artifactId>parallel</artifactId>
+      <version>${parallel.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <version>${maven-model.version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
+    <dependency>
+      <groupId>net.sf.saxon</groupId>
+      <artifactId>Saxon-HE</artifactId>
+      <version>${Saxon-HE.version}</version>
+    </dependency>
+    
+    <!-- Message Listener -->
+    <dependency>
+      <groupId>fr.lefebvredalloz.xml</groupId>
+      <artifactId>log4j-saxon-listener</artifactId>
+      <version>${log4j-saxon-listener.version}</version>
+    </dependency>
+    <!-- Protocol CP -->
+    <dependency>
+      <groupId>fr.lefebvredalloz.xml</groupId>
+      <artifactId>cp-protocol</artifactId>
+      <version>${cp-protocol.version}</version>
+    </dependency>
+    <!-- LOG4J -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jcl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons-io.version}</version>
+    </dependency>
+    
+    
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+    
+    
+  </dependencies>
+  
+  <build>
+    <!-- EXEC -->
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>main</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>java</executable>
+              <includeProjectDependencies>true</includeProjectDependencies>
+              <arguments>
+                <argument>-Djava.protocol.handler.pkgs=sun.net.www.protocol</argument>
+                <argument>-cp</argument>
+                <classpath/>
+                <argument>eu.els.sie.xml.processing.engine.run.Test</argument>
+                <argument>-xpeUri</argument>
+                <argument>src/test/resources/examples/xpe/xslt-pipe.xpe</argument>
+                <argument>-Puri1=file:/D:/00-PRO/01-SITC/00-DEV/xml-processing-engine-dist/src/test/resources/examples/data</argument>
+                <argument>-Puri2=file:/D:/00-PRO/01-SITC/00-DEV/xml-processing-engine-dist/target/run/debug</argument>
+                <argument>-Puri3=file:/D:/00-PRO/01-SITC/00-DEV/xml-processing-engine-dist/target/run/out1</argument>
+                <argument>-Puri4=file:/D:/00-PRO/01-SITC/00-DEV/xml-processing-engine-dist/target/run/out2</argument>
+              </arguments>
+              <skip>${skipTests}</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <distributionManagement>
+    <snapshotRepository>
+      <id>${snapshotRepositoryId}</id>
+      <url>${snapshotRepositoryUrl}</url>
+    </snapshotRepository>
+    <repository>
+      <id>${releaseRepositoryId}</id>
+      <url>${releaseRepositoryUrl}</url>
+    </repository>
+  </distributionManagement>
+  
+</project>

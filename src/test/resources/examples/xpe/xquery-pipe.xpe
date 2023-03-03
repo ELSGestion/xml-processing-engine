@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+  
+    <param name="uri1" select="()"/>
+    <param name="uri2" select="()"/>
+  <param name="uri3" select="()"/>
+  <param name="uri4" select="()"/>
+  
+		<pipe
+		  name="'PIPE'"
+		  source="$uri1"
+			source-file-name-variable-name="input-file-name"
+			parallel="true()" threads="1" file-size-max="'1 ko'" file-name-filter="'.*[2-3].*'"
+			recursive="true()" 
+			debug="true()" 
+			debug-dir-uri="$uri2">
+			<xquery uri="'../xquery/do.xquery'">
+				<param name="num" select="'0'"/>
+			</xquery>
+		  <xquery uri="'../xquery/do.xquery'">
+		    <param name="num" select="'0'"/>
+		  </xquery>
+		  <pipe 
+			  destination-file-name="replace($input-file-name,'[.]xml','.1.xml')"
+			  destination="$uri3">
+		    <xquery uri="'../xquery/do.xquery'">
+		      <param name="num" select="'0'"/>
+		    </xquery>
+		    <xquery uri="'../xquery/do.xquery'">
+		      <param name="num" select="'0'"/>
+		    </xquery>
+		  </pipe>
+		  <pipe
+			  destination-file-name="replace($input-file-name,'[.]xml','.2.xml')"
+			  destination="$uri4">
+		    <xquery uri="'../xquery/do.xquery'">
+		      <param name="num" select="'0'"/>
+		    </xquery>
+		    <xquery uri="'../xquery/do.xquery'">
+		      <param name="num" select="'3'"/>
+		    </xquery>
+		  </pipe>
+		</pipe>		
+
+
+</processing>

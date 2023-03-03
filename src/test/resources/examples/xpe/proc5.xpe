@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+	<call uri="'proc-return.xml'" name="result">
+		<param name="msg" select="'toto'" />
+	</call>
+	
+	<message source="'source'" select="$result"/>
+
+
+</processing>

@@ -1,0 +1,17 @@
+<configuration xmlns="http://saxon.sf.net/ns/configuration"
+               edition="HE">
+  <global
+    lineNumbering="true"
+    errorListener="eu.els.sie.xml.saxon.utils.Log4jStandardErrorListener"
+  />
+  
+  <!-- bug saxon when using traceListener (Saxon - Bug #4114) -->
+  <!-- traceListener="net.sf.saxon.trace.XSLTTraceListener" -->
+  
+  <xslt 
+  staticErrorListener="eu.els.sie.xml.saxon.utils.Log4jStandardErrorListener"/>
+  
+  <xquery 
+  staticErrorListener="eu.els.sie.xml.saxon.utils.Log4jStandardErrorListener"/>
+  
+</configuration>

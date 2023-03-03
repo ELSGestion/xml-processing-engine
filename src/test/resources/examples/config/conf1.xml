@@ -1,0 +1,12 @@
+<configuration xmlns="http://saxon.sf.net/ns/configuration"
+               edition="HE">
+  <global
+    lineNumbering="true"
+    errorListener="eu.els.sie.xml.saxon.utils.Log4jStandardErrorListener"
+  />
+
+  <xslt 
+    staticErrorListener="eu.els.sie.xml.saxon.utils.Log4jStandardErrorListener"
+    messageEmitter="eu.els.sie.xml.saxon.utils.Log4jMessageListenerProxy"/>
+    
+</configuration>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd"
+    >
+    
+    <variable name="sequence" select="(1,2,3)"/>
+    
+    <java class="'com.sitc.api.xml.processing.engine.run.JavaStepExample'" method="'method'" param="$sequence" result="xsi:java"/>
+    
+    <message select="$xsi:java" source="'source'"/>
+        
+    
+</processing>

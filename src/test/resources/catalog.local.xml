@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- local catalog to access the script model for autocompletion for example -->
+
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <rewriteURI uriStartString="dependency://com.github.hamdikarray+xml-processing-engine-dist/" rewritePrefix="jar:file:C:/Users/hamdi/.m2/repository/com/github/hamdikarray/xml-processing-engine-dist/1.00.00/xml-processing-engine-dist-1.00.00-jar-with-dependencies.jar!/"/>
+  <rewriteSystem systemIdStartString="dependency://com.github.hamdikarray+xml-processing-engine-dist/" rewritePrefix="jar:file:C:/Users/hamdi/.m2/repository/com/github/hamdikarray/xml-processing-engine-dist/1.00.00/xml-processing-engine-dist-1.00.00-jar-with-dependencies.jar!/"/>
+</catalog>

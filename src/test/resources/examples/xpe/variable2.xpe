@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+    <variable name="sequence" select="(1,2,3)"/>
+
+    <message source="'source'" select="count($sequence)"/>
+
+    <variable name="sequence" select="$sequence,(4,5)"/>
+    
+    <message source="'source'" select="count($sequence)"/>
+    
+    <choose>
+        <when test="true()">
+            <!-- <variable name="sequence" select="'mise à jour'"/> -->
+            <variable name="local" select="'local'"/>
+            <message source="'source'" select="$local"/>
+        </when>
+    </choose>
+    
+    
+    <variable name="test" select="1"/>
+    <foreach select="$sequence" name="i">
+    	<message source="'source'" select="$test"/>
+    	<variable select="$test,$i" name="test"/>
+    </foreach>
+
+</processing>

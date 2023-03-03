@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+	<variable name="uri" select="'message.xpe'" />
+  <variable name="msg" select="doc('../data/test.xml')/note/heading/string()" />
+	
+
+	<call uri="$uri">
+		<param name="msg" select="$msg" />
+	</call>
+
+
+</processing>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:file="http://expath.org/ns/file" 
+	xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+	<param name="a" select="()"/>
+	<param name="x" select="false()"/>
+	
+  <message select="$a" source="'source'"/>
+  <message select="$x" source="'source'"/>
+    
+
+  <try-catch-finally>
+    <try>
+      <message select="file:list('toto')" source="'source'"/>
+    </try>
+    <catch exception-variable-name="e">
+      <message select="$e" source="'source'" level="error" throwable="$e"/>
+    </catch>
+    <finally>
+      <message select="'finally'" source="'source'"/>
+    </finally>
+  </try-catch-finally>
+    
+
+</processing>

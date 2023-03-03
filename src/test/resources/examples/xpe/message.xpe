@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:test="testing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config ../../../main/resources/grammars/xpe-conf.xsd">
+
+    <param name="msg" select="'default'"/>
+    
+    <message source="'source'" select="$msg"/>
+
+</processing>

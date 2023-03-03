@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+    
+    <foreach name="i" select="'a','b','c'">
+        <choose>
+            <when test="true()">
+                <call uri="'message.xpe'">
+                    <param name="msg" select="$i"/>
+                    <param name="param" select="()"/>
+                </call>
+            </when>
+        </choose>
+    </foreach>
+    
+    <message source="'source'" select="'hello'"/>
+    
+</processing>

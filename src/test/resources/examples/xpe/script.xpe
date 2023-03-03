@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd"
+    xmlns:file="http://expath.org/ns/file"
+    >
+    
+    <variable name="sequence" select="(1,2,3)"/>
+    
+    <script uri="'../shell/script.bat'" args="$sequence" result="script-result"/>
+    
+  <message source="'source'" select="$script-result"/>
+    
+</processing>

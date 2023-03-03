@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  file:/D:/00-PRO/01-SITC/00-DEV/xml-processing-engine/src/main/resources/grammars/xpe-conf.xsd"
+    xmlns:saxon="http://saxon.sf.net/"
+    xmlns:file="http://expath.org/ns/file"
+    >
+  
+  <option name="saxon:message-emitter" select="''"/>
+    
+    <variable name="sequence" select="(1,2,3)"/>
+    
+    <choose>
+        <when test="false()">
+            <message source="'source'" select="'la seqeunce est vide'"/>
+        </when>
+        <otherwise>
+            <message source="'source'" select="'exit avec un code 5'"/>
+            <exit code="5"/>
+            <message source="'source'" select="'unreachable'"/>
+        </otherwise>
+    </choose>
+        
+    
+</processing>

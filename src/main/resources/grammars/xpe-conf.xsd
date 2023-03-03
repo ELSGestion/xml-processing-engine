@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://com.sitc.xml.processing.engine.org/config" xmlns:config="http://com.sitc.xml.processing.engine.org/config" xmlns:xerces="http://xerces.apache.org" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+
+  <xs:annotation>
+    <xs:appinfo>XML Processing Engine</xs:appinfo>
+    <xs:documentation xml:lang="en">
+      This Schema defines the XML processing engine model.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="processing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="config:po"/>
+        <xs:group ref="config:multi-step"/>
+      </xs:sequence>
+      <xs:attribute name="message-listener-class" use="optional" type="xs:string"/>
+      <xs:attribute name="pipe-listener-class" use="optional" type="xs:string"/>
+      <xs:attribute name="listener-class" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="po">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        This group defines parameters, option and saxon config for the parent element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" ref="config:config"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="config:param"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="config:option"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="multi-step">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        This group defines à multiple step.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="config:variable"/>
+        <xs:element ref="config:message"/>
+        <xs:element ref="config:pipe"/>
+        <xs:element ref="config:call"/>
+        <xs:element ref="config:choose"/>
+        <xs:element ref="config:if"/>
+        <xs:element ref="config:foreach"/>
+        <xs:element ref="config:java"/>
+        <xs:element ref="config:script"/>
+        <xs:element ref="config:try-catch-finally"/>
+        <xs:element ref="config:read"/>
+        <xs:element ref="config:exit"/>
+        <xs:element ref="config:break"/>
+        <xs:element ref="config:continue"/>
+        <xs:element ref="config:wait"/>
+        <xs:element ref="config:return"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="pipe">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          pipe define an XSLT stylesheet transform pipe step. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:element minOccurs="0" maxOccurs="1" ref="config:config"/>
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element minOccurs="1" maxOccurs="unbounded" ref="config:xslt"/>
+          <xs:element minOccurs="1" maxOccurs="unbounded" ref="config:xquery"/>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="config:pipe"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="optional" type="xs:string"/>
+      <xs:attribute name="source" use="optional" type="xs:string"/>
+      <xs:attribute name="destination" use="optional" type="xs:string"/>
+      <xs:attribute name="parallel" use="optional" type="xs:string"/>
+      <xs:attribute name="threads" use="optional" type="xs:string"/>
+      <xs:attribute name="file-size-max" use="optional" type="xs:string"/>
+      <xs:attribute name="file-name-filter" use="optional" type="xs:string"/>
+      <xs:attribute name="dir-name-filter" use="optional" type="xs:string"/>
+      <xs:attribute name="recursive" use="optional" type="xs:string"/>
+      <xs:attribute name="source-file-name-variable-name" use="optional" type="xs:QName" default="file-name"/>
+      <xs:attribute name="destination-file-name" use="optional" type="xs:string"/>
+      <xs:attribute name="delete-source" use="optional" type="xs:string"/>
+      <xs:attribute name="debug" use="optional" type="xs:string"/>
+      <xs:attribute name="debug-dir-uri" use="optional" type="xs:string"/>
+      <xs:attribute name="break-on-error" use="optional" type="xs:string"/>
+      <xs:attribute name="listener-class" use="optional" type="xs:string"/>
+      <xs:assert id="test" test="count(descendant::config:xquery) = 0 or count(descendant::config:xslt) = 0" xerces:message="Pipe can contains only one type of step : xslt or xquery"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="xslt">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          xslt define an sub XSLT stylesheet transform pipe. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="config:param"/>
+      </xs:sequence>
+      <xs:attribute name="uri" use="required" type="xs:string"/>
+      <xs:attribute name="initial-mode" use="optional" type="xs:string"/>
+      <xs:attribute name="initial-template" use="optional" type="xs:string"/>
+      <xs:attribute name="use-when" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="xquery">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          xquery define an sub XQUERY evaluation pipe. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="config:param"/>
+      </xs:sequence>
+      <xs:attribute name="uri" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="choose">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        choose define multiple conditionnal step. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" ref="config:when"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="config:otherwise"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="when">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+      <xs:attribute name="test" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="otherwise">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="if">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+      <xs:attribute name="test" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="foreach">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        foreach define a looping step. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+      <xs:attribute name="name" use="required" type="xs:QName"/>
+      <xs:attribute name="select" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          message define parametric log4j message step. The messageListener can be overriden. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="select" use="required" type="xs:string"/>
+      <xs:attribute name="source" use="required" type="xs:string"/>
+      <xs:attribute name="level" default="info" type="config:msglevel"/>
+      <xs:attribute name="param" use="optional" type="xs:string"/>
+      <xs:attribute name="throwable" use="optional" type="xs:string"/>
+      <xs:attribute name="listener-class" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="read">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          read from console. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="call">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          call define à new processing step whitch its uri. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" ref="config:config"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="config:param"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="config:option"/>
+      </xs:sequence>
+      <xs:attribute name="uri" use="required" type="xs:string"/>
+      <xs:attribute name="name" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="java">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          java define à simple call of functions defined in java code.
+          The result is stored in variable named "result".
+        </xs:documentation>
+        <xs:documentation>
+          Exemple : 
+          public static XdmValue printParam(XdmValue param)
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="class" use="required" type="xs:string"/>
+      <xs:attribute name="method" use="required" type="xs:string"/>
+      <xs:attribute name="param" use="required" type="xs:string"/>
+      <xs:attribute name="result" use="required" type="xs:QName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="script">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          script define à simple call of shell/cmd ... scripts.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="uri" use="required" type="xs:string"/>
+      <xs:attribute name="args" use="required" type="xs:string"/>
+      <xs:attribute name="result" use="required" type="xs:QName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="try-catch-finally">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          try-catch-finally define à try catch finally java like instruction.
+          The exception, if catched, is stored in variable named catch/@name.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" ref="config:try"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="config:catch"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="config:finally"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="try">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="catch">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+      <xs:attribute name="exception-variable-name" use="optional" type="xs:QName" default="e"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="finally">
+    <xs:complexType>
+      <xs:group ref="config:multi-step"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="exit">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          force the processing to exit with code (System.exit(code)). 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="code" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="wait">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          thread.sleep. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="period" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="return">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          return . 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="select" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="break">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        force the processing, loop to break. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="continue">
+    <xs:annotation>
+      <xs:appinfo>XML Processing Engine</xs:appinfo>
+      <xs:documentation xml:lang="en">
+        force loop to continue. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="param">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:QName"/>
+      <xs:attribute name="select" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="option">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:QName"/>
+      <xs:attribute name="select" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variable">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:QName"/>
+      <xs:attribute name="select" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="config">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>XML Processing Engine</xs:appinfo>
+        <xs:documentation xml:lang="en">
+          allows overrides of the processing saxon config 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="uri" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="msglevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="info"/>
+      <xs:enumeration value="debug"/>
+      <xs:enumeration value="warn"/>
+      <xs:enumeration value="error"/>
+      <xs:enumeration value="trace"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

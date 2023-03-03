@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing xmlns="http://com.sitc.xml.processing.engine.org/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://com.sitc.xml.processing.engine.org/config  dependency://com.github.hamdikarray+xml-processing-engine-dist/grammars/xpe-conf.xsd">
+
+	<variable name="sequence" select="(1,2,3)" />
+
+	<foreach name="i" select="$sequence">
+	<wait period="1000"/>
+		<foreach name="j" select="$sequence">
+			<if test="$j=2">
+				<continue />
+			</if>
+			<variable name="k" select="$i" />
+			<message source="'source'"
+				select="concat('i = ',$i,', j = ',$j,', k = ',$k)" />
+		</foreach>
+	</foreach>
+
+	<message source="'source'" select="'hello'" />
+
+</processing>
